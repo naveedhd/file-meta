@@ -1,0 +1,16 @@
+{
+  "name": "file-meta",
+  "version": "1.0.0",
+  "description": "File Metadata Microservice",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Naveed Usmani",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "multer": "^1.1.0",
+    "multer-autoreap": "0.0.9"
+  }
+}
