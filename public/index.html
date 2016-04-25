@@ -1,46 +1,71 @@
-<!DOCTYPE html>
-<html>
-<body>
-	<p>
-		This is a very simple test harness which posts to
-		<a href="https://cryptic-ridge-9197.herokuapp.com/api/fileanalyse">
-			https://cryptic-ridge-9197.herokuapp.com/api/fileanalyse</a>
-		Take a look at <i>View page source</i> to see how it works.
-	</p>
-	<form id="file-form" enctype="multipart/form-data">
-		<input type="file" name="the-file" />
-		<input type="submit" value="Upload" />
-	</form>
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			var files;
-			$('input[type=file]').on('change', function(event) {
-				files = event.target.files;
-			});
-			$('form').on('submit', function(event) {
-				event.stopPropagation();
-				event.preventDefault();
-				var data = new FormData();
-				$.each(files, function(key, value) {
-					data.append(key, value);
-				});
-				$.ajax({
-					url: window.location.origin + '/api/fileanalyse/',
-					type: 'POST',
-					data: data,
-					cache: false,
-					processData: false,
-					contentType: false,
-					error: function(jqXHR, textStatus, errorThrown) {
-						alert('ERRORS: ' + textStatus);
-					},
-					success: function(data) {
-						alert('FILE SIZE: ' + data.fileSize);
-					}
-				});
-			});
-		});
-	</script>
-</body>
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>File Metadata microservice</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="header">
+                API Basejump: File Metadeta microservice
+            </h1>
+            <blockquote>
+                User stories:
+                <ul>1) I can submit a FormData object that includes a file upload.</ul>
+                <ul>2) When I submit something, I will receive the file size in bytes within the JSON response.</ul>
+            </blockquote>
+
+            <h3>Example usage: Uploading file</h3>
+            <code>Click on Choose File and select file from your disk. Then click Upload.</code><br>
+            <h3>Example output:</h3>
+            <code>
+                FILE SIZE: 668
+            </code>
+
+						<br /><br />
+						<form id="file-form" enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-xs-6">
+										<input type="file" name="the-file" />
+								</div>
+								<div class="col-xs-6">
+									<input type="submit" value="Upload" />
+								</div>
+							</div>
+
+						</form>
+        </div>
+
+				<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						var files;
+						$('input[type=file]').on('change', function(event) {
+							files = event.target.files;
+						});
+						$('form').on('submit', function(event) {
+							event.stopPropagation();
+							event.preventDefault();
+							var data = new FormData();
+							$.each(files, function(key, value) {
+								data.append(key, value);
+							});
+							$.ajax({
+								url: window.location.origin + '/api/fileanalyse/',
+								type: 'POST',
+								data: data,
+								cache: false,
+								processData: false,
+								contentType: false,
+								error: function(jqXHR, textStatus, errorThrown) {
+									alert('ERRORS: ' + textStatus);
+								},
+								success: function(data) {
+									alert('FILE SIZE: ' + data.fileSize);
+								}
+							});
+						});
+					});
+				</script>
+    </body>
 </html>
