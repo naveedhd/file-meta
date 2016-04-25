@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",
-    "multer": "^1.1.0",
-    "multer-autoreap": "0.0.9"
+    "multer": "^1.1.0"
   }
 }
